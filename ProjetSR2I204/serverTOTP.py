@@ -51,7 +51,7 @@ class ResquestHandler(http.server.BaseHTTPRequestHandler):
     # 处理一个GET请求
     def do_GET(self):
         try:
-            full_path = os.getcwd() +self.path   
+            self.full_path = os.getcwd() +self.path   
             if not os.path.exists(full_path):
             #抛出异常：文件未找到
                 raise ServerException("'{0}' not found".format(self.path))
