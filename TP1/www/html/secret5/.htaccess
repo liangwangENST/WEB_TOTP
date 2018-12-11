@@ -1,0 +1,4 @@
+AuthName "secret5"
+AuthType Digest
+AuthUserFile "/etc/apache2/.htdigest"
+Require valid-user

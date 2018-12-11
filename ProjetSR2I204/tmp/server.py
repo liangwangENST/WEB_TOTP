@@ -116,7 +116,7 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
 
     # 错误页面模板
     Error_Page = """\
-        <html>
+        <html>if '__name__'=='__main__':  
         <body>
         <h1>Error accessing {path}</h1>
         <p>{msg}</p>
@@ -140,6 +140,7 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
             self.handle_error(msg)
 
     def handle_error(self, msg):
+        
         content = self.Error_Page.format(path=self.path, msg=msg)
         self.send_content((content), 404)
 
