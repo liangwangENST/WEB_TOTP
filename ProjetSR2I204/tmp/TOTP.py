@@ -6,10 +6,11 @@ Created on Tue Dec  4 19:35:21 2018
 @author: ubuntu
 """
 import  pyotp
-
-totp = pyotp.TOTP("TPTsdsqd")
-totp1 = totp.now()
-print(totp1)
-
-verify = totp.verify(totp1)
-print(verify)
+def generatorTOTP(sharkey):
+	totp = pyotp.TOTP("sharkey")
+	totp1 = totp.now()
+	print(totp1)
+	return totp1
+def checkTOTP(value_totp)
+	verify = totp.verify(value_totp)
+	return verify

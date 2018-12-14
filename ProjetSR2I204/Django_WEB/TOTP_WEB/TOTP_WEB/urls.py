@@ -15,15 +15,24 @@ Including another URLconf
 """
 from django.conf.urls import url
  
-from . import login,register,totp_buy,login_totp,success_register,validate_login,\
-fail_login
- 
+from . import login,register,totp_buy,success_register,validate_login,\
+fail_login, totpdownload
+
+from django.conf.urls.static import static
+from TOTP_WEB import settings
+
 urlpatterns = [
     url(r'^login$'                , login.display),
     url(r'^register$'             , register.display),
     url(r'^buy$'                  , totp_buy.display),
-    url(r'^totp-buyed$'			  , login_totp.download),
-    url(r'^success-register$'     , success_register.display),
+    url(r'^totp-buyed$'			  , totpdownload.download),
+    url(r'^success-register$'     , success_register.insertData),
     url(r'^validate-login$'       , validate_login.display),
-    url(r'^fail-login$'           , fail_login.display),
+    #url(r'^fail-login$'           , fail_login.display),
+    #url(r'^$',upload),
+    #url(r'^uploads', uploads, name ="uploads"),
+    url(r'download/(?P<f>.*)$'    , totpdownload.download , name = 'download' ),
+
+
 ]
+

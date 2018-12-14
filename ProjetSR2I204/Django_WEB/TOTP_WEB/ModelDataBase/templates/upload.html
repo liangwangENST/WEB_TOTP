@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title></title>
+</head>
+<body>
+{% for file in file_list %}
+<li><a href="#">{{ file.name }}</a></li>
+{% endfor %}
+<form enctype="multipart/form-data" method="POST" action="{% url 'uploads' %}"> {% csrf_token %}
+   <input type="file" name="file" />
+   <br /> 
+   <input type="submit" value="上传文件" /> 
+</form>
+</body>
+</html>
