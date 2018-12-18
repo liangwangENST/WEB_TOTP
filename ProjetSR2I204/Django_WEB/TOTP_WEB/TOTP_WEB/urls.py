@@ -14,14 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls import url
- 
 from . import login,register,totp_buy,success_register,validate_login,\
-fail_login, totpdownload
-
+fail_login, totpdownload,archive
 from django.conf.urls.static import static
 from TOTP_WEB import settings
+from django.contrib import admin
 
+
+admin.autodiscover()
 urlpatterns = [
+    url(r'^admin'                , admin.site.urls),
     url(r'^login$'                , login.display),
     url(r'^register$'             , register.display),
     url(r'^buy$'                  , totp_buy.display),
@@ -32,7 +34,6 @@ urlpatterns = [
     #url(r'^$',upload),
     #url(r'^uploads', uploads, name ="uploads"),
     url(r'download/(?P<f>.*)$'    , totpdownload.download , name = 'download' ),
-
-
+    url(r'archive'                , archive.archive ),
 ]
 

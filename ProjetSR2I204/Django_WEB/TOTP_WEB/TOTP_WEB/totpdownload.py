@@ -1,6 +1,29 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse,StreamingHttpResponse
 import urllib.request
+from ModelDataBase.models import DataBaseAccount
+from TOTP_WEB.checkpasswd import checkTOTP,checkNoTOTP
+import random, string
+
+def randomword(length):
+   letters = string.ascii_lowercase
+   return ''.join(random.choice(letters) for i in range(length))
+
+def download(request):
+	ID 		= request.GET["id"]
+	passwd  = request.GET["passwd"]
+	if (checkNoTOTP(ID,passwd)):
+		#diplay in the html
+		secret = randomword(16)
+		#update table
+		obj = DataBaseAccount.objects.get(account=ID)
+		obj.sharkey= secret
+		obj.save()
+		return render_to_response("totp_buyed.html", {'secret':secret})
+	else :
+		return render_to_response('totp_buy.html')
+
+
 '''def download(request):
 	url0 	  = "11.txt"
 	LocalPath ='./Document/Telecom/'
@@ -24,7 +47,7 @@ def readFile(filename,chunk_size=512):
             else:
                 break
 '''
-def download(request,f = "Files/11.txt"):
+'''def download(request,f = "Files/11.txt"):
 	t = f.split()
 	file_name = t[-1]
 	t.remove(t[-1])
@@ -47,3 +70,4 @@ def download(request,f = "Files/11.txt"):
 		return HttpResponse("Sorry but not find the file")
 
 	return reponse 
+'''

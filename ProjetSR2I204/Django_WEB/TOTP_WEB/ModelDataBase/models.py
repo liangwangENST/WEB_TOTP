@@ -8,6 +8,6 @@ class DataBaseAccount(models.Model):
 	birthday         = models.CharField(max_length=30)
 	passwd           = models.CharField(max_length=30)
 	sharkey          = models.CharField(max_length=1000)
-
+	timestamp  		 = models.DateTimeField()
 	def __str__(self):
 		return self.account
